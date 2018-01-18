@@ -21,11 +21,26 @@
             </div>
         </div>
         <div class="container">
-            <form name="registration">
+            <form name="registration" ng-controller="FormController" novalidate>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email address</label>
                     <div class="col-sm-4">
-                        <input type="email" name="email" class="form-control" placeholder="Enter an email address" ng-model="email" ng-required>
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter an email address"
+                            ng-model="email.text"
+                            required
+                        >
+                    </div>
+                    <div role="alert">
+                        <span class="text-danger" ng-show="registration.email.$error.required">
+                            An email is required.
+                        </span>
+                        <span class="text-danger" ng-show="registration.email.$error.email">
+                            Please provide a valid email.
+                        </span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -55,6 +70,6 @@
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script src="js/controller/RegistrationForm.js"></script>
+    <script src="js/RegistrationForm.js"></script>
 </body>
 </html>
