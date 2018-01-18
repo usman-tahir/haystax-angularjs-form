@@ -2,6 +2,7 @@
 var app = angular.module("RegistrationForm", ["ui.bootstrap.modal"]);
 
 app.controller("FormController", ["$scope", function($scope) {
+    $scope.name
     $scope.email = "";
     $scope.password = "";
     $scope.phone = "";
@@ -16,5 +17,15 @@ app.controller("FormController", ["$scope", function($scope) {
 
     $scope.cancel = function() {
         $scope.showModal = false;
+    };
+
+    // Naive reset
+    $scope.reset = function(form) {
+        $scope.name = "";
+        $scope.email = "";
+        $scope.password = "";
+        $scope.phone = "";
+        form.$setPristine();
+        form.$setUntouched();
     };
 }]);

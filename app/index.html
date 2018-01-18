@@ -23,6 +23,27 @@
         <div class="container">
             <form name="registration" ng-controller="FormController" novalidate>
                 <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your name"
+                            ng-model="name"
+                            required
+                        >
+                    </div>
+                    <div role="alert">
+                        <span class="text-danger" ng-show="registration.name.$error.required">
+                            A name is required.
+                        </span>
+                        <span class="text-success" ng-show="registration.name.$valid">
+                            Why hello there, {{ name }}!
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">Email address</label>
                     <div class="col-sm-4">
                         <input
@@ -84,7 +105,7 @@
                             class="form-control"
                             placeholder="Enter a phone number"
                             ng-model="phone"
-                            ng-pattern="/(^[0-9]{10,10}$)|(^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+))?$/"
+                            ng-pattern="/^\(?\d{1}?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/"
                             required
                         >
                     </div>
@@ -106,7 +127,7 @@
                             <div class="modal-header"><h4>Your registration is complete!</h4></div>
                             <div class="modal-body">
                                 <p>
-                                    You've been registered using the email <span class="text-primary">{{ email }}</span>. Please check your email
+                                    Thanks for registering with us, <span class="text-primary">{{ name }}</span>! Please check your email
                                     for a verification link. Thanks!
                                 </p>
                             </div>
@@ -120,7 +141,7 @@
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-success" ng-disabled="registration.$invalid" ng-click="submit()">Register</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <button type="reset" class="btn btn-danger" ng-click="reset(registration)">Reset</button>
                     </div>
                 </div>
             </form>
