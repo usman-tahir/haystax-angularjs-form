@@ -30,7 +30,7 @@
                             name="email"
                             class="form-control"
                             placeholder="Enter an email address"
-                            ng-model="email.text"
+                            ng-model="email"
                             required
                         >
                     </div>
@@ -84,7 +84,7 @@
                             class="form-control"
                             placeholder="Enter a phone number"
                             ng-model="phone"
-                            ng-pattern="phoneNumberRegex"
+                            ng-pattern="/(^[0-9]{10,10}$)|(^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+))?$/"
                             required
                         >
                     </div>
@@ -95,12 +95,32 @@
                         <span class="text-danger" ng-show="registration.phone.$error.pattern">
                             Please enter a valid phone number.
                         </span>
+                        <span class="text-success" ng-show="registration.phone.$valid">
+                            You've entered a valid phone number!
+                        </span>
+                    </div>
+                </div>
+                <div modal="showModal" class="modal" close="cancel()">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header"><h4>Your registration is complete!</h4></div>
+                            <div class="modal-body">
+                                <p>
+                                    You've been registered using the email <span class="text-primary">{{ email }}</span>. Please check your email
+                                    for a verification link. Thanks!
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" ng-click="ok()">Okay</button>
+                                <button class="btn" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <button type="submit" class="btn btn-success">Register</button>
-                        <button class="btn btn-danger" ng-click="resetForm()">Reset</button>
+                        <button type="submit" class="btn btn-success" ng-disabled="registration.$invalid" ng-click="submit()">Register</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
                     </div>
                 </div>
             </form>
@@ -111,7 +131,8 @@
     <!-- jQuery/Bootstrap dependencies from bower_components/ -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+    <!-- Other dependencies -->
+    <script src="js/angular-ui-bootstrap-modal.js"></script>
     <script src="js/RegistrationForm.js"></script>
 </body>
 </html>
